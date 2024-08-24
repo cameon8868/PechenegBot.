@@ -1,0 +1,11 @@
+meta:
+  environment: python
+  toolchain:
+    name: pip
+    version: 3.9
+build:
+  requirementsPath: C:\Users\User\PycharmProjects\telegramBot\requirements.txt
+run:
+  scriptName: C:\Users\User\PycharmProjects\telegramBot\.venv\teleBot.py
+  persistenceMount: C:\Users\User\PycharmProjects\telegramBot\db
+  containerPort: 80
