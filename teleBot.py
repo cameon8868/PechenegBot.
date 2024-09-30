@@ -301,17 +301,9 @@ def get_user_text(message,):
                                                caption=f'🧩<b>{randPlayerCharacter[0]}</b>\n\n'
                                                        f'🎰Редкость: {randPlayerCharacter[1]}\n'
                                                        f'💰Количество pts: {cash - 100 + pts_sql}', parse_mode='html')
-
-
-
-
-
-
-
-                        else:
-                            convert = str(datetime.timedelta(seconds = TimeCard - time))
-
-                            bot.send_message(message.chat.id,
+                else:
+                        convert = str(datetime.timedelta(seconds = TimeCard - time))
+                        bot.send_message(message.chat.id,
                                                  f'❌<b>СЛИШКОМ РАНО</b> \n'
                                                  f'🕓Карту можно получить через:<b> {convert}</b>',
                                                  parse_mode='html')
@@ -378,7 +370,7 @@ def get_user_text(message,):
                 if list_card == '':
                     bot.edit_message_text("Нет карт такой редкости", call.message.chat.id, call.message.message_id)
                 else:
-                    bot.edit_message_text(list_card, call.message.chat.id, call.message.message_id)
+                    bot.edit_message_text(f'Мертвые легенды карты {message.from_user.first_name}:\n{list_card}', call.message.chat.id, call.message.message_id)
             elif call.data == 'mif':
                 cursor.execute("SELECT DISTINCT user_id_ss, card_id, rarity FROM collection WHERE user_id_ss = ?",
                                (user_id,))
@@ -392,7 +384,7 @@ def get_user_text(message,):
                 if list_card == '':
                     bot.edit_message_text("Нет карт такой редкости", call.message.chat.id, call.message.message_id)
                 else:
-                    bot.edit_message_text(list_card, call.message.chat.id, call.message.message_id)
+                    bot.edit_message_text(f'Мифические карты {message.from_user.first_name}:\n{list_card}', call.message.chat.id, call.message.message_id)
             elif call.data == 'Leg':
                 cursor.execute("SELECT DISTINCT user_id_ss, card_id, rarity FROM collection WHERE user_id_ss = ?",
                                (user_id,))
@@ -406,7 +398,7 @@ def get_user_text(message,):
                 if list_card == '':
                     bot.edit_message_text("Нет карт такой редкости", call.message.chat.id, call.message.message_id)
                 else:
-                    bot.edit_message_text(list_card, call.message.chat.id, call.message.message_id)
+                    bot.edit_message_text(f'Легендарные карты {message.from_user.first_name}:\n{list_card}', call.message.chat.id, call.message.message_id)
             elif call.data == 'epic':
                 cursor.execute("SELECT DISTINCT user_id_ss, card_id, rarity FROM collection WHERE user_id_ss = ?",
                                (user_id,))
@@ -420,7 +412,7 @@ def get_user_text(message,):
                 if list_card == '':
                     bot.edit_message_text("Нет карт такой редкости", call.message.chat.id, call.message.message_id)
                 else:
-                    bot.edit_message_text(list_card, call.message.chat.id, call.message.message_id)
+                    bot.edit_message_text(f'Эпические карты {message.from_user.first_name}:\n{list_card}', call.message.chat.id, call.message.message_id)
 
             elif call.data == 'rary':
                 cursor.execute("SELECT DISTINCT user_id_ss, card_id, rarity FROM collection WHERE user_id_ss = ?",
@@ -435,7 +427,7 @@ def get_user_text(message,):
                 if list_card == '':
                     bot.edit_message_text("Нет карт такой редкости", call.message.chat.id, call.message.message_id)
                 else:
-                    bot.edit_message_text(list_card, call.message.chat.id, call.message.message_id)
+                    bot.edit_message_text(f'Редкие карты {message.from_user.first_name}:\n{list_card}', call.message.chat.id, call.message.message_id)
 
             elif call.data == 'defolt':
                 cursor.execute("SELECT DISTINCT user_id_ss, card_id, rarity FROM collection WHERE user_id_ss = ?", (user_id,))
@@ -449,7 +441,7 @@ def get_user_text(message,):
                 if list_card == '':
                     bot.edit_message_text("Нет карт такой редкости", call.message.chat.id, call.message.message_id)
                 else:
-                    bot.edit_message_text(list_card, call.message.chat.id, call.message.message_id)
+                    bot.edit_message_text(f'Обычные карты {message.from_user.first_name}:\n{list_card}', call.message.chat.id, call.message.message_id)
 
             elif call.data == 'full':
                 pass
