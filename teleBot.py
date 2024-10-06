@@ -2,7 +2,7 @@ import telebot, random, time, itertools,sqlite3, datetime, emoji
 from telebot import types
 
 
-conn = sqlite3.connect("C:/Users/User/PycharmProjects/telegramBot/db/database", check_same_thread=False)
+conn = sqlite3.connect("telegramBot/db/database", check_same_thread=False)
 cursor = conn.cursor()
 output = []
 
@@ -118,7 +118,7 @@ def get_user_text(message):
                                 pts_sql = 750
                                 cursor.execute("UPDATE User SET pts_sql = pts_sql + ? WHERE user_id_sql = ?",
                                                (pts_sql, user_id))
-                                card_avatar = "C:/Users/User/PycharmProjects/telegramBot/avatar/" + randPlayerCharacter[
+                                card_avatar = "telegramBot/avatar/" + randPlayerCharacter[
                                     2]
                                 bot.send_photo(message.chat.id, open(card_avatar, 'rb'),
                                                caption=f'💎<b>{randPlayerCharacter[0]}</b> \nпопалась  повторка, тебе будут начислены только очки за карту\n\n'
@@ -131,7 +131,7 @@ def get_user_text(message):
                                                     rarity=randPlayerCharacter[1])
                                 cursor.execute("UPDATE User SET pts_sql = pts_sql + ? WHERE user_id_sql = ?",
                                                (pts_sql, user_id))
-                                card_avatar = "C:/Users/User/PycharmProjects/telegramBot/avatar/" + randPlayerCharacter[
+                                card_avatar = "telegramBot/avatar/" + randPlayerCharacter[
                                     2]
                                 bot.send_photo(message.chat.id, open(card_avatar, 'rb'),
                                                caption=f'💎<b>{randPlayerCharacter[0]}</b>\n\n'
@@ -147,7 +147,7 @@ def get_user_text(message):
                                 pts_sql = 250
                                 cursor.execute("UPDATE User SET pts_sql = pts_sql + ? WHERE user_id_sql = ?",
                                                (pts_sql, user_id))
-                                card_avatar = "C:/Users/User/PycharmProjects/telegramBot/avatar/" + randPlayerCharacter[
+                                card_avatar = "telegramBot/avatar/" + randPlayerCharacter[
                                     2]
                                 bot.send_photo(message.chat.id, open(card_avatar, 'rb'),
                                                caption=f'⭐️<b>{randPlayerCharacter[0]}</b> \nпопалась  повторка, тебе будут начислены только очки за карту\n\n'
@@ -160,7 +160,7 @@ def get_user_text(message):
                                                     rarity=randPlayerCharacter[1])
                                 cursor.execute("UPDATE User SET pts_sql = pts_sql + ? WHERE user_id_sql = ?",
                                                (pts_sql, user_id))
-                                card_avatar = "C:/Users/User/PycharmProjects/telegramBot/avatar/" + randPlayerCharacter[
+                                card_avatar = "telegramBot/avatar/" + randPlayerCharacter[
                                     2]
                                 bot.send_photo(message.chat.id, open(card_avatar, 'rb'),
                                                caption=f'⭐️<b>{randPlayerCharacter[0]}</b>\n\n'
@@ -181,7 +181,7 @@ def get_user_text(message):
                                 pts_sql = 125
                                 cursor.execute("UPDATE User SET pts_sql = pts_sql + ? WHERE user_id_sql = ?",
                                                (pts_sql, user_id))
-                                card_avatar = "C:/Users/User/PycharmProjects/telegramBot/avatar/" + randPlayerCharacter[
+                                card_avatar = "telegramBot/avatar/" + randPlayerCharacter[
                                     2]
                                 bot.send_photo(message.chat.id, open(card_avatar, 'rb'),
                                                caption=f'🔥<b>{randPlayerCharacter[0]}</b> \nпопалась  повторка, тебе будут начислены только очки за карту\n\n'
@@ -194,7 +194,7 @@ def get_user_text(message):
                                                     rarity=randPlayerCharacter[1])
                                 cursor.execute("UPDATE User SET pts_sql = pts_sql + ? WHERE user_id_sql = ?",
                                                (pts_sql, user_id))
-                                card_avatar = "C:/Users/User/PycharmProjects/telegramBot/avatar/" + randPlayerCharacter[
+                                card_avatar = "telegramBot/avatar/" + randPlayerCharacter[
                                     2]
                                 bot.send_photo(message.chat.id, open(card_avatar, 'rb'),
                                                caption=f'🔥<b>{randPlayerCharacter[0]}</b>\n\n'
@@ -217,7 +217,7 @@ def get_user_text(message):
                                 pts_sql = 50
                                 cursor.execute("UPDATE User SET pts_sql = pts_sql + ? WHERE user_id_sql = ?",
                                                (pts_sql, user_id))
-                                card_avatar = "C:/Users/User/PycharmProjects/telegramBot/avatar/" + randPlayerCharacter[
+                                card_avatar = "telegramBot/avatar/" + randPlayerCharacter[
                                     2]
                                 bot.send_photo(message.chat.id, open(card_avatar, 'rb'),
                                                caption=f'⚡️<b>{randPlayerCharacter[0]}</b>\n попалась  повторка, тебе будут начислены только очки за карту\n\n'
@@ -230,7 +230,7 @@ def get_user_text(message):
                                                     rarity=randPlayerCharacter[1])
                                 cursor.execute("UPDATE User SET pts_sql = pts_sql + ? WHERE user_id_sql = ?",
                                                (pts_sql, user_id))
-                                card_avatar = "C:/Users/User/PycharmProjects/telegramBot/avatar/" + randPlayerCharacter[2]
+                                card_avatar = "telegramBot/avatar/" + randPlayerCharacter[2]
                                 bot.send_photo(message.chat.id, open(card_avatar, 'rb'),
                                                caption=f'⚡️<b>{randPlayerCharacter[0]}</b>\n\n'
                                                        f'🎰Редкость: {randPlayerCharacter[1]}\n'
@@ -254,7 +254,7 @@ def get_user_text(message):
                                 pts_sql = 25
                                 cursor.execute("UPDATE User SET pts_sql = pts_sql + ? WHERE user_id_sql = ?",
                                                (pts_sql, user_id))
-                                card_avatar = "C:/Users/User/PycharmProjects/telegramBot/avatar/" + randPlayerCharacter[2]
+                                card_avatar = "telegramBot/avatar/" + randPlayerCharacter[2]
                                 bot.send_photo(message.chat.id, open(card_avatar, 'rb'),
                                                caption=f'💫<b>{randPlayerCharacter[0]}</b> \nпопалась  повторка, тебе будут начислены только очки за карту\n\n'
                                                        f'🎰Редкость: {randPlayerCharacter[1]}\n'
@@ -265,7 +265,7 @@ def get_user_text(message):
                                 db_table_Collection(user_id_ss = user_id, card_id=randPlayerCharacter[0], rarity=randPlayerCharacter[1])
                                 cursor.execute("UPDATE User SET pts_sql = pts_sql + ? WHERE user_id_sql = ?",
                                                (pts_sql, user_id))
-                                card_avatar = "C:/Users/User/PycharmProjects/telegramBot/avatar/" + randPlayerCharacter[2]
+                                card_avatar = "telegramBot/avatar/" + randPlayerCharacter[2]
                                 bot.send_photo(message.chat.id, open(card_avatar, 'rb'),
                                                caption=f'💫<b>{randPlayerCharacter[0]}</b>\n\n'
                                                        f'🎰Редкость: {randPlayerCharacter[1]}\n'
@@ -290,7 +290,7 @@ def get_user_text(message):
                                 pts_sql = 2500
                                 cursor.execute("UPDATE User SET pts_sql = pts_sql + ? WHERE user_id_sql = ?",
                                                (pts_sql, user_id))
-                                card_avatar = "C:/Users/User/PycharmProjects/telegramBot/avatar/" + randPlayerCharacter[
+                                card_avatar = "telegramBot/avatar/" + randPlayerCharacter[
                                     2]
                                 bot.send_photo(message.chat.id, open(card_avatar, 'rb'),
                                                caption=f'🧩<b>{randPlayerCharacter[0]}</b> \nпопалась  повторка, тебе будут начислены только очки за карту \n\n'
@@ -303,7 +303,7 @@ def get_user_text(message):
                                                     rarity=randPlayerCharacter[1])
                                 cursor.execute("UPDATE User SET pts_sql = pts_sql + ? WHERE user_id_sql = ?",
                                                (pts_sql, user_id))
-                                card_avatar = "C:/Users/User/PycharmProjects/telegramBot/avatar/" + randPlayerCharacter[
+                                card_avatar = "telegramBot/avatar/" + randPlayerCharacter[
                                     2]
                                 bot.send_photo(message.chat.id, open(card_avatar, 'rb'),
                                                caption=f'🧩<b>{randPlayerCharacter[0]}</b>\n\n'
