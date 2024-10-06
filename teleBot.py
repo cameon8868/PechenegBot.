@@ -293,7 +293,7 @@ def get_user_text(message):
                                 card_avatar = "telegramBot/avatar/" + randPlayerCharacter[
                                     2]
                                 bot.send_photo(message.chat.id, open(card_avatar, 'rb'),
-                                               caption=f'🧩<b>{randPlayerCharacter[0]}</b> \nпопалась  повторка, тебе будут начислены только очки за карту \n\n'
+                                               caption=f'🧩<b>{randPlayerCharacter[0]}</b> \n♻️Попалась  повторка, тебе будут начислены только очки за карту \n\n'
                                                        f'🎰Редкость: {randPlayerCharacter[1]}\n'
                                                        f'💰Количество pts: {cash - 100 + pts_sql}', parse_mode='html')
 
@@ -513,8 +513,8 @@ def get_user_text(message):
                                           f'🌐 Твой aйди: {message.from_user.id}\n'
                                           f'🗓 Дата регистрации: {datetime.datetime.fromisoformat(last_time[0]).strftime("%d.%m.20%yг в %H:%M")}\n'
                                           f'💰Количество pts: {cash-100}\n'
-                                          f'🥡Количество круток: {card_coll[0] - 1}\n'
-                                          f'❓ Помощь\n⚡️  @cammeon\n👨‍🦯  @slepaa', parse_mode='html')
+                                          f'🌀Количество круток: {card_coll[0] - 1}\n'
+                                          f'❓Помощь\n⚡️  @cammeon\n👨‍🦯  @slepaa', parse_mode='html')
         except:
             bot.send_message(message.chat.id, 'вы не зарегистрированы', parse_mode='html')
 
@@ -547,7 +547,7 @@ def get_user_text(message):
             promo = cursor.fetchall()
             for i in promo:
                 if i[1] > 1:
-                    bot.send_message(message.chat.id, '✅успешно введен промокод!', parse_mode='html')
+                    bot.send_message(message.chat.id, '🎁успешно введен промокод!', parse_mode='html')
                     cursor.execute("UPDATE User SET card_coll = card_coll + 3 WHERE user_id_sql = ?", (user_id,))
                     cursor.execute("UPDATE promo SET UseOrNeuse = UseOrNeuse - 1 WHERE user_id = ?", (user_id,))
                 else:
@@ -555,6 +555,29 @@ def get_user_text(message):
 
         except:
             bot.send_message(message.chat.id, 'вы не зарегистрированы', parse_mode='html')
+
+    elif message.text.lower() == '.state':
+        '''всего игроков'''
+        top = 'SELECT * FROM User'
+        cursor.execute(top)
+        rec_top = cursor.fetchall()
+        rec_top.sort(key=lambda x: x[0], reverse=True)
+        a = ''
+        for i in rec_top:
+            a += str(i[0])
+            break
+
+        '''активных игроков: больше 500 птс'''
+        active = 'SELECT user_id_sql FROM User WHERE pts_sql >= 2000'
+        cursor.execute(active)
+        rec_active = cursor.fetchall()
+        h = 0
+        for e in rec_active:
+            h += 1
+
+
+
+        bot.send_message(message.chat.id, f'Статистика бота:\nвсего игроков: {a}\nактивных игроков: {h}')
 
 
 
