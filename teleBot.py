@@ -6,7 +6,7 @@ conn = sqlite3.connect("C:/Users/User/PycharmProjects/telegramBot/db/database", 
 cursor = conn.cursor()
 output = []
 
-def db_table_val(user_id_sql: int, user_name_sql: str, pts_sql: int, last_time: time, card_coll: str):
+def db_table_val(user_id_sql: int, user_name_sql: str, pts_sql: int, last_time: time, card_coll: int):
         cursor.execute('INSERT INTO User (user_id_sql, user_name_sql, pts_sql, last_time, card_coll) VALUES (?, ?, ?, ?, ?)',
                        (user_id_sql, user_name_sql, pts_sql,last_time, card_coll))
 
@@ -17,6 +17,9 @@ def db_table_Card(name_card: str, rarity: str, avatar_card: str, pts_card: int):
 def db_table_Collection(user_id_ss: int, card_id: str, rarity: str):
     cursor.execute('INSERT INTO collection (user_id_ss, card_id, rarity) VALUES (?, ?, ?)',
                    (user_id_ss, card_id, rarity))
+
+def db_table_promo(user_id: int, UseOrNeuse: int):
+    cursor.execute('INSERT INTO promo (user_id, UseOrNeuse) VALUES (?, ?)', (user_id, UseOrNeuse))
 conn.commit()
 
 
@@ -64,13 +67,13 @@ def start(message):
                 us_name_sql = message.from_user.first_name
                 pts_sq = 100
                 last_time = datetime.datetime.now()
-                db_table_val(user_id_sql=us_id_sql, user_name_sql=us_name_sql, pts_sql=pts_sq, last_time=last_time, card_coll=' ')
+                db_table_val(user_id_sql=us_id_sql, user_name_sql=us_name_sql, pts_sql=pts_sq, last_time=last_time, card_coll=2)
+                db_table_promo(user_id=user_id, UseOrNeuse=2)
 
 
 
 
     conn.commit()
-
 
 
 @bot.message_handler()
@@ -93,14 +96,20 @@ def get_user_text(message):
     cursor.execute('SELECT last_time FROM User WHERE user_id_sql = ?', (user_id,))
     conn.commit()
     last_time = cursor.fetchone()
+    cursor.execute('SELECT card_coll FROM User WHERE user_id_sql = ?', (user_id,))
+    conn.commit()
+    card_coll = cursor.fetchone()
 
     if message.text.lower() == 'получить карту' or message.text == '💅' +'получить карту':
             try:
-                TimeCard = 3
+                TimeCard = 7200
                 time = (current_time - datetime.datetime.fromisoformat(last_time[0])).seconds
-                if time >= TimeCard:
-                        cursor.execute('UPDATE User SET last_time = ? WHERE user_id_sql = ?', (current_time, user_id))
+                card_kd = card_coll[0]
 
+
+                if time >= TimeCard or card_kd > 1:
+                        cursor.execute('UPDATE User SET last_time = ? WHERE user_id_sql = ?', (current_time, user_id))
+                        cursor.execute("UPDATE User SET card_coll = card_coll - 1 WHERE user_id_sql = ?",(user_id,))
                         randomcard = random.randint( 0, 107)
 
                         if randomcard in range(1, 2):
@@ -311,6 +320,7 @@ def get_user_text(message):
                         bot.send_message(message.chat.id, 'вы не зарегистрированы', parse_mode='html')
 
 
+
     elif message.text.lower() == 'мои карты' or message.text == '🃏' +'мои карты':
         # try:
         cursor.execute("SELECT DISTINCT user_id_ss, card_id, rarity FROM collection WHERE user_id_ss = ?", (user_id,))
@@ -502,7 +512,8 @@ def get_user_text(message):
             bot.send_message(message.chat.id, f'🎮 Твой ник: {message.from_user.first_name} \n'
                                           f'🌐 Твой aйди: {message.from_user.id}\n'
                                           f'🗓 Дата регистрации: {datetime.datetime.fromisoformat(last_time[0]).strftime("%d.%m.20%yг в %H:%M")}\n'
-                                          f'💰Количество pts: {cash-100}\n\n'
+                                          f'💰Количество pts: {cash-100}\n'
+                                          f'🥡Количество круток: {card_coll[0] - 1}\n'
                                           f'❓ Помощь\n⚡️  @cammeon\n👨‍🦯  @slepaa', parse_mode='html')
         except:
             bot.send_message(message.chat.id, 'вы не зарегистрированы', parse_mode='html')
@@ -525,10 +536,27 @@ def get_user_text(message):
                     msg += f'{id}. <a href="tg://user?id={i[0]}">{i[2]}</a> - {i[1]-100} pts\n'
                 else:
                     break
-            bot.send_message(message.chat.id,f'Таблица лидеров🎯:\n{msg}', parse_mode='html')
+            bot.send_message(message.chat.id,f'🎯Таблица лидеров:\n{msg}', parse_mode='html')
 
         except:
             bot.send_message(message.chat.id, 'вы не зарегистрированы', parse_mode='html')
+
+    elif message.text.lower() == '!промокод slepapitar' or message.text.lower() == '.промокод slepapitar':
+        try:
+            cursor.execute('SELECT user_id, UseOrNeuse FROM promo WHERE user_id = ?', (user_id,))
+            promo = cursor.fetchall()
+            for i in promo:
+                if i[1] > 1:
+                    bot.send_message(message.chat.id, '✅успешно введен промокод!', parse_mode='html')
+                    cursor.execute("UPDATE User SET card_coll = card_coll + 3 WHERE user_id_sql = ?", (user_id,))
+                    cursor.execute("UPDATE promo SET UseOrNeuse = UseOrNeuse - 1 WHERE user_id = ?", (user_id,))
+                else:
+                    bot.send_message(message.chat.id, '❌вы уже использовали промокод, извиняй.', parse_mode='html')
+
+        except:
+            bot.send_message(message.chat.id, 'вы не зарегистрированы', parse_mode='html')
+
+
 
 
 while True:
