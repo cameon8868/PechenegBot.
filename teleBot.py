@@ -1,6 +1,12 @@
-import telebot, random, time, itertools,sqlite3, datetime, emoji
+import datetime
+import itertools
+import random
+import sqlite3
+import telebot
+import time
 from telebot import types
 
+way = 'C:/Users/User/PycharmProjects/'
 
 conn = sqlite3.connect("telegramBot/db/database", check_same_thread=False)
 cursor = conn.cursor()
@@ -31,11 +37,14 @@ rec_Card_list = cursor.fetchall()
 time.sleep(5)
 bot = telebot.TeleBot('7337494301:AAHxZaJGuha7dpmnTJv_AnCA-DvrQK_0hTs')
 
+'''7686165994:AAGq2HVB89IAwER3s_Z6Ic8rYRwnVWH8jVw beta
+   7337494301:AAHxZaJGuha7dpmnTJv_AnCA-DvrQK_0hTs alfa'''
 
-itembtn1 = types.KeyboardButton(emoji.emojize('\ud83d\udc85') + 'получить карту')
-itembtn2 = types.KeyboardButton(emoji.emojize('\ud83c\udccf') + 'мои карты')
-itembtn3 = types.KeyboardButton(emoji.emojize('\u2699\ufe0f') + 'настройки')
-itembtn4 = types.KeyboardButton(emoji.emojize('\ud83e\udd47') + 'рейтинг')
+
+itembtn1 = types.KeyboardButton('💅' + 'получить карту')
+itembtn2 = types.KeyboardButton( '🃏'+ 'мои карты')
+itembtn3 = types.KeyboardButton( '⚙️' + 'настройки')
+itembtn4 = types.KeyboardButton( '🥇'+ 'рейтинг')
 
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -121,7 +130,7 @@ def get_user_text(message):
                                 card_avatar = "telegramBot/avatar/" + randPlayerCharacter[
                                     2]
                                 bot.send_photo(message.chat.id, open(card_avatar, 'rb'),
-                                               caption=f'💎<b>{randPlayerCharacter[0]}</b> \nпопалась  повторка, тебе будут начислены только очки за карту\n\n'
+                                               caption=f'💎<b>{randPlayerCharacter[0]}</b> \n♻️Попалась  повторка, тебе будут начислены только очки за карту\n\n'
                                                        f'🎰Редкость: {randPlayerCharacter[1]}\n'
                                                        f'💰Количество pts: {cash - 100 + pts_sql}', parse_mode='html')
 
@@ -150,7 +159,7 @@ def get_user_text(message):
                                 card_avatar = "telegramBot/avatar/" + randPlayerCharacter[
                                     2]
                                 bot.send_photo(message.chat.id, open(card_avatar, 'rb'),
-                                               caption=f'⭐️<b>{randPlayerCharacter[0]}</b> \nпопалась  повторка, тебе будут начислены только очки за карту\n\n'
+                                               caption=f'⭐️<b>{randPlayerCharacter[0]}</b> \n♻️Попалась  повторка, тебе будут начислены только очки за карту\n\n'
                                                        f'🎰Редкость: {randPlayerCharacter[1]}\n'
                                                        f'💰Количество pts: {cash - 100 + pts_sql}', parse_mode='html')
 
@@ -184,7 +193,7 @@ def get_user_text(message):
                                 card_avatar = "telegramBot/avatar/" + randPlayerCharacter[
                                     2]
                                 bot.send_photo(message.chat.id, open(card_avatar, 'rb'),
-                                               caption=f'🔥<b>{randPlayerCharacter[0]}</b> \nпопалась  повторка, тебе будут начислены только очки за карту\n\n'
+                                               caption=f'🔥<b>{randPlayerCharacter[0]}</b> \n♻️Попалась  повторка, тебе будут начислены только очки за карту\n\n'
                                                        f'🎰Редкость: {randPlayerCharacter[1]}\n'
                                                        f'💰Количество pts: {cash - 100 + pts_sql}', parse_mode='html')
 
@@ -220,7 +229,7 @@ def get_user_text(message):
                                 card_avatar = "telegramBot/avatar/" + randPlayerCharacter[
                                     2]
                                 bot.send_photo(message.chat.id, open(card_avatar, 'rb'),
-                                               caption=f'⚡️<b>{randPlayerCharacter[0]}</b>\n попалась  повторка, тебе будут начислены только очки за карту\n\n'
+                                               caption=f'⚡️<b>{randPlayerCharacter[0]}</b>\n♻️Попалась  повторка, тебе будут начислены только очки за карту\n\n'
                                                        f'🎰Редкость: {randPlayerCharacter[1]}\n'
                                                        f'💰Количество pts: {cash - 100 + pts_sql}', parse_mode='html')
 
@@ -256,7 +265,7 @@ def get_user_text(message):
                                                (pts_sql, user_id))
                                 card_avatar = "telegramBot/avatar/" + randPlayerCharacter[2]
                                 bot.send_photo(message.chat.id, open(card_avatar, 'rb'),
-                                               caption=f'💫<b>{randPlayerCharacter[0]}</b> \nпопалась  повторка, тебе будут начислены только очки за карту\n\n'
+                                               caption=f'💫<b>{randPlayerCharacter[0]}</b> \n♻️Попалась  повторка, тебе будут начислены только очки за карту\n\n'
                                                        f'🎰Редкость: {randPlayerCharacter[1]}\n'
                                                        f'💰Количество pts: {cash - 100 + pts_sql}', parse_mode='html')
 
@@ -317,7 +326,7 @@ def get_user_text(message):
                                                  parse_mode='html')
 
             except:
-                        bot.send_message(message.chat.id, 'вы не зарегистрированы', parse_mode='html')
+                        bot.send_message(message.chat.id, 'eror 404', parse_mode='html')
 
 
 
@@ -344,7 +353,7 @@ def get_user_text(message):
                     elif row[2] == 'Обычная':
                         indexCardDefolt += 1
                     elif row[2] == 'Мертвая легенда':
-                        indexCardDefolt += 1
+                        indexPressF += 1
 
                 elif row[0] != user_id:
                     break
@@ -365,126 +374,111 @@ def get_user_text(message):
 
         @bot.callback_query_handler(func=lambda call: True)
         def callback_inline(call):
-            user_id = message.from_user.id
-            markup_inline = types.InlineKeyboardMarkup(row_width=1)
-            back = types.InlineKeyboardButton(text=f'⬅️Назад', callback_data='back')
-            markup_inline.add(back)
             if call.data == 'PressF':
+                user_name = call.from_user.first_name
+                user_id_ss = call.from_user.id
                 cursor.execute("SELECT DISTINCT user_id_ss, card_id, rarity FROM collection WHERE user_id_ss = ?",
-                               (user_id,))
+                               (user_id_ss,))
                 a = cursor.fetchall()
                 list_card = ''
                 for row in a:
-                    if row[0] == user_id and row[2] == 'Мертвая легенда':
+                    if row[0] == user_id_ss and row[2] == 'Мертвая легенда':
                         list_card += f'🧩{row[1]}\n'
-                    elif row[0] != user_id:
+                    elif row[0] != user_id_ss:
                         break
                 if list_card == '':
-                    bot.edit_message_text("Нет карт такой редкости", call.message.chat.id, call.message.message_id, reply_markup=markup_inline)
+                    bot.edit_message_text("Нет карт такой редкости", call.message.chat.id, call.message.message_id)
                 else:
-                    bot.edit_message_text(f'Мертвые легенды карты {message.from_user.first_name}:\n{list_card}', call.message.chat.id, call.message.message_id, reply_markup=markup_inline)
+                    bot.edit_message_text(f'Мертвые легенды карты {user_name}:\n{list_card}', call.message.chat.id, call.message.message_id)
             elif call.data == 'mif':
+                user_name = call.from_user.first_name
+                user_id_ss = call.from_user.id
+
                 cursor.execute("SELECT DISTINCT user_id_ss, card_id, rarity FROM collection WHERE user_id_ss = ?",
-                               (user_id,))
+                               (user_id_ss,))
                 a = cursor.fetchall()
                 list_card = ''
                 for row in a:
-                    if row[0] == user_id and row[2] == 'Мифическая':
+                    if row[0] == user_id_ss and row[2] == 'Мифическая':
                         list_card += f'💎{row[1]}\n'
-                    elif row[0] != user_id:
+                    elif row[0] != user_id_ss:
                         break
                 if list_card == '':
-                    bot.edit_message_text("Нет карт такой редкости", call.message.chat.id, call.message.message_id, reply_markup=markup_inline)
+                    bot.edit_message_text("Нет карт такой редкости", call.message.chat.id, call.message.message_id)
                 else:
-                    bot.edit_message_text(f'Мифические карты {message.from_user.first_name}:\n{list_card}', call.message.chat.id, call.message.message_id, reply_markup=markup_inline)
+                    bot.edit_message_text(f'Мифические карты {user_name}:\n{list_card}', call.message.chat.id, call.message.message_id)
             elif call.data == 'Leg':
+                user_name = call.from_user.first_name
+                user_id_ss = call.from_user.id
                 cursor.execute("SELECT DISTINCT user_id_ss, card_id, rarity FROM collection WHERE user_id_ss = ?",
-                               (user_id,))
+                               (user_id_ss,))
                 a = cursor.fetchall()
                 list_card = ''
                 for row in a:
-                    if row[0] == user_id and row[2] == 'Легендарная':
+                    if row[0] == user_id_ss and row[2] == 'Легендарная':
                         list_card += f'⭐️{row[1]}\n'
-                    elif row[0] != user_id:
+                    elif row[0] != user_id_ss:
                         break
                 if list_card == '':
-                    bot.edit_message_text("Нет карт такой редкости", call.message.chat.id, call.message.message_id, reply_markup=markup_inline)
+                    bot.edit_message_text("Нет карт такой редкости", call.message.chat.id, call.message.message_id)
                 else:
-                    bot.edit_message_text(f'Легендарные карты {message.from_user.first_name}:\n{list_card}', call.message.chat.id, call.message.message_id, reply_markup=markup_inline)
+                    bot.edit_message_text(f'Легендарные карты {user_name}:\n{list_card}', call.message.chat.id, call.message.message_id)
             elif call.data == 'epic':
+                user_name = call.from_user.first_name
+                user_id_ss = call.from_user.id
                 cursor.execute("SELECT DISTINCT user_id_ss, card_id, rarity FROM collection WHERE user_id_ss = ?",
-                               (user_id,))
+                               (user_id_ss,))
                 a = cursor.fetchall()
                 list_card = ''
                 for row in a:
-                    if row[0] == user_id and row[2] == 'Эпическая':
+                    if row[0] == user_id_ss and row[2] == 'Эпическая':
+
                         list_card += f'🔥{row[1]}\n'
-                    elif row[0] != user_id:
+                    elif row[0] != user_id_ss:
                         break
                 if list_card == '':
-                    bot.edit_message_text("Нет карт такой редкости", call.message.chat.id, call.message.message_id, reply_markup=markup_inline)
+                    bot.edit_message_text("Нет карт такой редкости", call.message.chat.id, call.message.message_id)
                 else:
-                    bot.edit_message_text(f'Эпические карты {message.from_user.first_name}:\n{list_card}', call.message.chat.id, call.message.message_id, reply_markup=markup_inline)
+                    bot.edit_message_text(f'Эпические карты {user_name}:\n{list_card}', call.message.chat.id, call.message.message_id)
 
             elif call.data == 'rary':
+                user_name = call.from_user.first_name
+                user_id_ss = call.from_user.id
                 cursor.execute("SELECT DISTINCT user_id_ss, card_id, rarity FROM collection WHERE user_id_ss = ?",
-                               (user_id,))
+                               (user_id_ss,))
                 a = cursor.fetchall()
                 list_card = ''
                 for row in a:
-                    if row[0] == user_id and row[2] == 'Редкая':
+                    if row[0] == user_id_ss and row[2] == 'Редкая':
                         list_card += f'⚡️{row[1]}\n'
-                    elif row[0] != user_id:
+                    elif row[0] != user_id_ss:
                         break
                 if list_card == '':
-                    bot.edit_message_text("Нет карт такой редкости", call.message.chat.id, call.message.message_id, reply_markup=markup_inline)
+                    bot.edit_message_text("Нет карт такой редкости", call.message.chat.id, call.message.message_id)
                 else:
-                    bot.edit_message_text(f'Редкие карты {message.from_user.first_name}:\n{list_card}', call.message.chat.id, call.message.message_id, reply_markup=markup_inline)
+                    bot.edit_message_text(f'Редкие карты {user_name}:\n{list_card}', call.message.chat.id, call.message.message_id)
 
             elif call.data == 'defolt':
-                cursor.execute("SELECT DISTINCT user_id_ss, card_id, rarity FROM collection WHERE user_id_ss = ?", (user_id,))
+                user_id_ss = call.from_user.id
+                user_name = call.from_user.first_name
+                cursor.execute("SELECT DISTINCT user_id_ss, card_id, rarity FROM collection WHERE user_id_ss = ?", (user_id_ss,))
                 a = cursor.fetchall()
                 list_card = ''
                 for row in a:
-                    if row[0] == user_id and row[2] == 'Обычная':
+
+                    if row[0] == user_id_ss and row[2] == 'Обычная':
                         list_card += f'💫{row[1]}\n'
-                    elif row[0] != user_id:
+                    elif row[0] != user_id_ss:
                         break
                 if list_card == '':
-                    bot.edit_message_text("Нет карт такой редкости", call.message.chat.id, call.message.message_id, reply_markup=markup_inline)
+                    bot.edit_message_text("Нет карт такой редкости", call.message.chat.id, call.message.message_id)
                 else:
-                    bot.edit_message_text(f'Обычные карты {message.from_user.first_name}:\n{list_card}', call.message.chat.id, call.message.message_id, reply_markup=markup_inline)
+                    bot.edit_message_text(f'Обычные карты {user_name}:\n{list_card}', call.message.chat.id, call.message.message_id)
 
             elif call.data == 'full':
                 pass
 
-            elif call.data == 'back':
-                cursor.execute("SELECT DISTINCT user_id_ss, card_id, rarity FROM collection WHERE user_id_ss = ?",
-                               (user_id,))
-                a = cursor.fetchall()
-                indexPressF = 0
-                indexCardMif = 0
-                indexCardLeg = 0
-                indexCardEpic = 0
-                indexCardRary = 0
-                indexCardDefolt = 0
-                for row in a:
-                    if row[0] == user_id:
-                        if row[2] == 'Мифическая':
-                            indexCardMif += 1
-                        elif row[2] == 'Легендарная':
-                            indexCardLeg += 1
-                        elif row[2] == 'Эпическая':
-                            indexCardEpic += 1
-                        elif row[2] == 'Редкая':
-                            indexCardRary += 1
-                        elif row[2] == 'Обычная':
-                            indexCardDefolt += 1
-                        elif row[2] == 'Мертвая легенда':
-                            indexCardDefolt += 1
 
-                    elif row[0] != user_id:
-                        break
 
                 markup_inline = types.InlineKeyboardMarkup(row_width=1)
                 pressF = types.InlineKeyboardButton(text=f'🧩Мёртвые легенды - {indexPressF}/4', callback_data='PressF')
@@ -516,12 +510,12 @@ def get_user_text(message):
                                           f'🌀Количество круток: {card_coll[0] - 1}\n'
                                           f'❓Помощь\n⚡️  @cammeon\n👨‍🦯  @slepaa', parse_mode='html')
         except:
-            bot.send_message(message.chat.id, 'вы не зарегистрированы', parse_mode='html')
+            bot.send_message(message.chat.id, 'eror 404', parse_mode='html')
 
 
 
     elif message.text.lower() == 'рейтинг' or message.text == '🥇' +'рейтинг':
-        try:
+        # try:
             top = 'SELECT user_id_sql, pts_sql, user_name_sql FROM User'
             cursor.execute(top)
             rec_top = cursor.fetchall()
@@ -538,8 +532,8 @@ def get_user_text(message):
                     break
             bot.send_message(message.chat.id,f'🎯Таблица лидеров:\n{msg}', parse_mode='html')
 
-        except:
-            bot.send_message(message.chat.id, 'вы не зарегистрированы', parse_mode='html')
+        # except:
+        #     bot.send_message(message.chat.id, 'вы не зарегистрированы', parse_mode='html')
 
     elif message.text.lower() == '!промокод slepapitar' or message.text.lower() == '.промокод slepapitar':
         try:
@@ -554,7 +548,7 @@ def get_user_text(message):
                     bot.send_message(message.chat.id, '❌вы уже использовали промокод, извиняй.', parse_mode='html')
 
         except:
-            bot.send_message(message.chat.id, 'вы не зарегистрированы', parse_mode='html')
+            bot.send_message(message.chat.id, 'eror 404', parse_mode='html')
 
     elif message.text.lower() == '.state':
         '''всего игроков'''
@@ -577,11 +571,11 @@ def get_user_text(message):
 
 
 
-        bot.send_message(message.chat.id, f'Статистика бота:\nвсего игроков: {a}\nактивных игроков: {h}')
+        bot.send_message(message.chat.id, f'Статистика бота:\nвсего игроков: {a}\n,=больше 2000 pts: {h}')
 
 
 
-
+# bot.polling(none_stop=True)
 while True:
     try:
         bot.polling(none_stop=True)
