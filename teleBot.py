@@ -35,10 +35,9 @@ rec_Card_list = cursor.fetchall()
 
 
 time.sleep(5)
-bot = telebot.TeleBot('7337494301:AAHxZaJGuha7dpmnTJv_AnCA-DvrQK_0hTs')
+bot = telebot.TeleBot('TOKEN')
 
-'''7686165994:AAGq2HVB89IAwER3s_Z6Ic8rYRwnVWH8jVw beta
-   7337494301:AAHxZaJGuha7dpmnTJv_AnCA-DvrQK_0hTs alfa'''
+
 
 
 itembtn1 = types.KeyboardButton('💅' + 'получить карту')
