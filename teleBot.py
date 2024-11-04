@@ -6,9 +6,9 @@ import telebot
 import time
 from telebot import types
 
-way = 'C:/Users/User/PycharmProjects/'
+way = ''
 
-conn = sqlite3.connect("telegramBot/db/database", check_same_thread=False)
+conn = sqlite3.connect("/db/database", check_same_thread=False)
 cursor = conn.cursor()
 output = []
 
